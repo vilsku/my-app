@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import MediaRow from "./mediaRow";
 
 const baseUrl = "http://media.mw.metropolia.fi/wbma/";
@@ -34,10 +33,6 @@ const MediaTable = () => {
       </tbody>
     </table>
   );
-};
-
-MediaTable.propTypes = {
-  media: PropTypes.array,
 };
 
 export default MediaTable;
