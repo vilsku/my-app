@@ -1,35 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import MediaRow from "./mediaRow";
+import { useAllMedia } from "../hooks/ApiHooks";
 
-const baseUrl = "http://media.mw.metropolia.fi/wbma/";
 
 const MediaTable = () => {
-  const [picArray, setPicArray] = useState([]);
-  const loadMedia = async () => {
-    const response = await fetch(baseUrl + 'media');
-    const json = await response.json();
-    // haetaan yksittäiset kuvat, jotta saadaan thumbnailit
+  const picArray = useAllMedia();
 
-    const items = await Promise.all(json.map(async (item) => {
-        const response = await fetch(baseUrl + 'media/' + item.file_id)
-        return await response.json();
-      }));
-      console.log(items);
-      setPicArray(items);
-  };
+  console.log(picArray);
 
-  useEffect(() => {
-    loadMedia();
-  }, []);
-  
   return (
     <table>
       <tbody>
-        {
-        picArray.map((file, index) => {
-          return <MediaRow file={file} key={index}/>;
-        })
-        }
+        {picArray.map((file, index) => {
+          return <MediaRow file={file} key={index} />;
+        })}
       </tbody>
     </table>
   );
