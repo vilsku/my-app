@@ -12,7 +12,7 @@ const RegisterForm = ({ history }) => {
       console.log(reg);
       const user = await login(inputs); //kirjautuu sisään automaattisesti rekisteröinnin jälkeen
       console.log(user);
-      history.push("/home");
+      history.push("/home"); //siirtyy automaattisesti etusivulle onnistuneen kirjautumisen jälkeen
       //erillinen funktio jotta voi sisältää enemmän toiminnalisuuksia esim kirjaudu automaattisesti/siirry etusivulle tms
       
     } else {
