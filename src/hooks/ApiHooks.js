@@ -42,4 +42,39 @@ const useSingleMedia = (id) => {
   return data;
 };
 
-export { useAllMedia, useSingleMedia };
+const register = async (inputs) => {
+  const fetchOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(inputs),
+  };
+  const response = await fetch(baseUrl + "users", fetchOptions);
+  return await response.json();
+};
+
+const login = async (inputs) => {
+  const fetchOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(inputs),
+  };
+  const response = await fetch(baseUrl + "login", fetchOptions);
+  return await response.json();
+};
+
+const checkUserAvailable = async (name) => {
+  const response = await fetch(baseUrl + "users/username/" + name)
+  return await response.json();
+};
+
+export {
+  useAllMedia,
+  useSingleMedia,
+  register,
+  login,
+  checkUserAvailable,
+};
