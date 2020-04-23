@@ -1,26 +1,32 @@
-import React from "react";
-import PropTypes from "prop-types";
-import useSignUpForm from "../hooks/RegisterHooks";
-import { register, login, checkUserAvailable } from "../hooks/ApiHooks";
-import { withRouter } from "react-router-dom";
+import React, {useContext} from 'react';
+import PropTypes from 'prop-types';
+import useSignUpForm from '../hooks/RegisterHooks';
+import {checkUserAvailable, login, register} from '../hooks/ApiHooks';
+import {withRouter} from 'react-router-dom';
+import {MediaContext} from '../contexts/MediaContext';
 
-const RegisterForm = ({ history }) => {
+const RegisterForm = ({history}) => {
+  // eslint-disable-next-line no-unused-vars
+  const [user, setUser] = useContext(MediaContext);
   const doRegister = async () => {
-    const freeUsername = await checkUserAvailable(inputs.username);
-    if (freeUsername.available) {
-      const reg = await register(inputs);
-      console.log(reg);
-      const user = await login(inputs); //kirjautuu sisään automaattisesti rekisteröinnin jälkeen
-      console.log(user);
-      history.push("/home"); //siirtyy automaattisesti etusivulle onnistuneen kirjautumisen jälkeen
-      //erillinen funktio jotta voi sisältää enemmän toiminnalisuuksia esim kirjaudu automaattisesti/siirry etusivulle tms
-      
-    } else {
-      console.log("ei vapaa");
+    try {
+      await checkUserAvailable(inputs.username);
+      await register(inputs);
+      // kirjaudu automaagisesti
+      const userdata = await login(inputs);
+      setUser(userdata.user);
+      // console.log(user);
+      // tallenna token
+      localStorage.setItem('token', userdata.token);
+      // siirry etusivulle
+      history.push('/home');
+    } catch (e) {
+      console.log(e.message);
+      // TODO: näytä vihe
     }
   };
 
-  const { inputs, handleInputChange, handleSubmit } = useSignUpForm(doRegister);
+  const {inputs, handleInputChange, handleSubmit} = useSignUpForm(doRegister);
   return (
     <>
       <h1>Register</h1>

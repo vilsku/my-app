@@ -1,7 +1,6 @@
-import React from "react";
-import MediaRow from "./mediaRow";
-import { useAllMedia } from "../hooks/ApiHooks";
-
+import React from 'react';
+import MediaRow from './MediaRow';
+import {useAllMedia} from '../hooks/ApiHooks';
 
 const MediaTable = () => {
   const picArray = useAllMedia();
@@ -11,9 +10,9 @@ const MediaTable = () => {
   return (
     <table>
       <tbody>
-        {picArray.map((file, index) => {
-          return <MediaRow file={file} key={index} />;
-        })}
+        {
+          picArray.map((file, index) => <MediaRow file={file} key={index}/>)
+        }
       </tbody>
     </table>
   );

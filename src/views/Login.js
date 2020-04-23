@@ -1,12 +1,12 @@
-import React from "react";
-import LoginForm from "../components/LoginForm";
-import RegisterForm from "../components/RegisterForm";
+import React from 'react';
+import LoginForm from '../components/LoginForm';
+import RegisterForm from '../components/RegisterForm';
 
 const Login = () => {
   return (
     <>
-      <LoginForm />
-      <RegisterForm />
+      <LoginForm/>
+      <RegisterForm/>
     </>
   );
 };
