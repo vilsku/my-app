@@ -38,6 +38,12 @@ const useSingleMedia = (id) => {
   return data;
 };
 
+const getAvatarImage = async (id) => {
+  console.log('ai', id);
+  const response = await fetch(baseUrl + 'tags/avatar_' + id);
+  return await response.json();
+};
+
 const register = async (inputs) => {
   const fetchOptions = {
     method: 'POST',
@@ -108,4 +114,5 @@ export {
   login,
   checkUserAvailable,
   checkToken,
+  getAvatarImage,
 };

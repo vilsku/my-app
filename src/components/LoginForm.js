@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
-import PropTypes from "prop-types";
-import useLoginForm from "../hooks/LoginHooks";
-import { login } from "../hooks/ApiHooks";
-import { withRouter } from "react-router-dom";
-import { MediaContext } from "../contexts/MediaContext";
-import { Button, TextField, Grid } from "@material-ui/core";
+import React, {useContext} from 'react';
+import PropTypes from 'prop-types';
+import useLoginForm from '../hooks/LoginHooks';
+import {login} from '../hooks/ApiHooks';
+import {withRouter} from 'react-router-dom';
+import {MediaContext} from '../contexts/MediaContext';
+import {Button, TextField, Grid} from '@material-ui/core';
 
-const LoginForm = ({ history }) => {
+const LoginForm = ({history}) => {
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useContext(MediaContext);
   const doLogin = async () => {
@@ -15,24 +15,24 @@ const LoginForm = ({ history }) => {
       setUser(userdata.user);
       // console.log(user);
       // tallenna token
-      localStorage.setItem("token", userdata.token);
+      localStorage.setItem('token', userdata.token);
       // siirry etusivulle
-      history.push("/home");
+      history.push('/home');
     } catch (e) {
       console.log(e.message);
       // TODO: näytä vihe
     }
   };
-  const { inputs, handleInputChange, handleSubmit } = useLoginForm(doLogin);
+  const {inputs, handleInputChange, handleSubmit} = useLoginForm(doLogin);
   return (
-    <Grid container spacing={3}>
+    <Grid container>
       <Grid item xs={12}>
         <h1>Login</h1>
       </Grid>
       <Grid item xs={12}>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+            <Grid container item xs={12}>
               <TextField
                 fullWidth
                 type="text"
@@ -42,7 +42,8 @@ const LoginForm = ({ history }) => {
                 value={inputs.username}
               />
             </Grid>
-            <Grid item xs={12}>
+
+            <Grid container item xs={12}>
               <TextField
                 fullWidth
                 type="password"
@@ -52,8 +53,14 @@ const LoginForm = ({ history }) => {
                 value={inputs.password}
               />
             </Grid>
-            <Grid item xs={12}>
-              <Button color="primary" type="submit" fullWidth variant="outlined">
+
+            <Grid container item xs={12}>
+              <Button
+                fullWidth
+                color="primary"
+                type="submit"
+                variant="outlined"
+              >
                 Login
               </Button>
             </Grid>

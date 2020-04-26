@@ -1,13 +1,3 @@
-table {
-  width: 40rem;
-  border-spacing: 0;
-  margin: auto;
-}
-
-td {
-  padding: 1rem;
-}
-
-td {
-  border-bottom: #ccc 1px solid;
+main {
+  padding-top: 5rem;
 }
