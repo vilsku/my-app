@@ -53,102 +53,103 @@ const ProfileForm = ({history}) => {
   return (
     <Grid container>
       <Grid item>
-        <Button fullWidth color="primary" onClick={showHide}>
+        <Button
+          fullWidth
+          color="primary"
+          onClick={showHide}
+        >
           Update profile
         </Button>
       </Grid>
 
-      {toggle && (
-        <>
-          <Grid item>
-            <h1>Update profile</h1>
-          </Grid>
-          <Grid item>
-            <ValidatorForm
-              onSubmit={handleSubmit}
-              instantValidate={false}
-              noValidate
-            >
-              <Grid container spacing={2}>
-                <Grid container item xs={12}>
-                  <TextValidator
-                    fullWidth
-                    type="text"
-                    name="username"
-                    label="Username"
-                    onChange={handleInputChange}
-                    value={inputs.username}
-                    validators={[
-                      "required",
-                      "minStringLength:3",
-                      "isAvailable",
-                    ]}
-                    errorMessages={[
-                      "this field is required",
-                      "minimum 3 charaters",
-                      inputs.username + " is not available",
-                    ]}
-                  />
-                </Grid>
-
-                <Grid container item xs={12}>
-                  <TextValidator
-                    fullWidth
-                    type="email"
-                    name="email"
-                    label="Email"
-                    onChange={handleInputChange}
-                    value={inputs.email}
-                    validators={["required", "isEmail"]}
-                    errorMessages={[
-                      "this field is required",
-                      "email is not valid",
-                    ]}
-                  />
-                </Grid>
-
-                <Grid container item xs={12}>
-                  <TextValidator
-                    fullWidth
-                    type="text"
-                    name="full_name"
-                    label="Full name"
-                    onChange={handleInputChange}
-                    value={inputs.full_name}
-                    validators={[
-                      "matchRegexp:^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-                    ]}
-                    errorMessages={["text only"]}
-                  />
-                </Grid>
-
-                <Grid container item xs={12}>
-                  <TextValidator
-                    fullWidth
-                    type="file"
-                    name="test"
-                    validators={[
-                      "allowedExtensions:image/png,image/jpeg,image/jpg",
-                    ]}
-                    errorMessages={["images only"]}
-                  />
-                </Grid>
-
-                <Grid container item xs={12}>
-                  <Button
-                    fullWidth
-                    color="primary"
-                    type="submit"
-                    variant="outlined"
-                  >
-                    Save profile
-                  </Button>
-                </Grid>
+      {toggle &&
+      <>
+        <Grid item>
+          <h1>Update profile</h1>
+        </Grid>
+        <Grid item>
+          <ValidatorForm
+            onSubmit={handleSubmit}
+            instantValidate={false}
+            noValidate
+          >
+            <Grid container>
+              <Grid container item>
+                <TextValidator
+                  fullWidth
+                  type="text"
+                  name="username"
+                  label="Username"
+                  onChange={handleInputChange}
+                  value={inputs.username}
+                  validators={[
+                    'required',
+                    'minStringLength:3',
+                    'isAvailable',
+                  ]}
+                  errorMessages={[
+                    'this field is required',
+                    'minimum 3 charaters',
+                    inputs.username + ' is not available',
+                  ]}
+                />
               </Grid>
-            </ValidatorForm>
-          </Grid>
-        </>
-      )}
+
+              <Grid container item>
+                <TextValidator
+                  fullWidth
+                  type="email"
+                  name="email"
+                  label="Email"
+                  onChange={handleInputChange}
+                  value={inputs.email}
+                  validators={['required', 'isEmail']}
+                  errorMessages={[
+                    'this field is required',
+                    'email is not valid']}
+                />
+              </Grid>
+
+              <Grid container item>
+                <TextValidator
+                  fullWidth
+                  type="text"
+                  name="full_name"
+                  label="Full name"
+                  onChange={handleInputChange}
+                  value={inputs.full_name}
+                  validators={
+                    ['matchRegexp:^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$']
+                  }
+                  errorMessages={['text only']}
+                />
+              </Grid>
+
+              <Grid container item>
+                <TextValidator
+                  fullWidth
+                  type="file"
+                  name="test"
+                  validators={['allowedExtensions:image/png,image/jpeg,image/jpg']}
+                  errorMessages={['images only']}
+                />
+              </Grid>
+
+              <Grid container item>
+                <Button
+                  fullWidth
+                  color="primary"
+                  type="submit"
+                  variant="contained">
+                  Save profile
+                </Button>
+              </Grid>
+            </Grid>
+          </ValidatorForm>
+
+        </Grid>
+      </>
+      }
     </Grid>
   );
 };

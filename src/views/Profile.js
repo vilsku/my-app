@@ -15,6 +15,7 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
 import ProfileForm from '../components/ProfileForm';
+import BackButton from '../components/BackButton';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
@@ -34,6 +35,7 @@ const Profile = () => {
   // console.log('avatar', avatar);
   return (
     <>
+      <BackButton />
       <Typography
         component="h1"
         variant="h2"

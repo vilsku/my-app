@@ -4,7 +4,7 @@ import useLoginForm from '../hooks/LoginHooks';
 import {login} from '../hooks/ApiHooks';
 import {withRouter} from 'react-router-dom';
 import {MediaContext} from '../contexts/MediaContext';
-import {Button, TextField, Grid} from '@material-ui/core';
+import {Button, TextField, Grid, Typography} from '@material-ui/core';
 
 const LoginForm = ({history}) => {
   // eslint-disable-next-line no-unused-vars
@@ -27,12 +27,15 @@ const LoginForm = ({history}) => {
   return (
     <Grid container>
       <Grid item xs={12}>
-        <h1>Login</h1>
+        <Typography
+          component="h1"
+          variant="h2"
+          gutterBottom>Login</Typography>
       </Grid>
       <Grid item xs={12}>
         <form onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
-            <Grid container item xs={12}>
+          <Grid container>
+            <Grid container item>
               <TextField
                 fullWidth
                 type="text"
@@ -43,7 +46,7 @@ const LoginForm = ({history}) => {
               />
             </Grid>
 
-            <Grid container item xs={12}>
+            <Grid container item>
               <TextField
                 fullWidth
                 type="password"
@@ -54,13 +57,12 @@ const LoginForm = ({history}) => {
               />
             </Grid>
 
-            <Grid container item xs={12}>
+            <Grid container item>
               <Button
                 fullWidth
                 color="primary"
                 type="submit"
-                variant="outlined"
-              >
+                variant="contained">
                 Login
               </Button>
             </Grid>
