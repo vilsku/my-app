@@ -147,7 +147,7 @@ const RegisterForm = ({history}) => {
                 fullWidth
                 color="primary"
                 type="submit"
-                variant="contained"
+                variant="outlined"
               >
                 Register
               </Button>

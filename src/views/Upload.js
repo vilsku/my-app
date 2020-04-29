@@ -85,19 +85,18 @@ const Upload = ({history}) => {
       <BackButton />
       <Grid container>
         <Grid item xs={12}>
-          <Typography
-            component="h1"
-            variant="h2"
-            gutterBottom>Upload</Typography>
+          <Typography component="h1" variant="h2" gutterBottom>
+            Upload
+          </Typography>
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <ValidatorForm
             onSubmit={handleSubmit}
             instantValidate={false}
             noValidate
           >
-            <Grid container>
-              <Grid container item>
+            <Grid container spacing={2}>
+              <Grid container item xs={12}>
                 <TextValidator
                   fullWidth
                   label="Title"
@@ -105,28 +104,24 @@ const Upload = ({history}) => {
                   name="title"
                   value={inputs.title}
                   onChange={handleInputChange}
-                  validators={[
-                    'required',
-                  ]}
-                  errorMessages={[
-                    'this field is required',
-                  ]}
+                  validators={["required"]}
+                  errorMessages={["this field is required"]}
                 />
               </Grid>
-              <Grid container item>
+              <Grid container item xs={12}>
                 <TextValidator
                   fullWidth
                   label="Description"
                   name="description"
                   value={inputs.description}
                   onChange={handleInputChange}
-                  validators={
-                    ['matchRegexp:^[a-öA-Ö]+(([\',. -][a-öA-Ö ])?[a-öA-Ö]*)*$']
-                  }
-                  errorMessages={['text only']}
+                  validators={[
+                    "matchRegexp:^[a-öA-Ö]+(([',. -][a-öA-Ö ])?[a-öA-Ö]*)*$",
+                  ]}
+                  errorMessages={["text only"]}
                 />
               </Grid>
-              <Grid container item>
+              <Grid container item xs={12}>
                 <TextValidator
                   fullWidth
                   type="file"
@@ -135,7 +130,7 @@ const Upload = ({history}) => {
                   onChange={handleFileChange}
                 />
               </Grid>
-              <Grid container item>
+              <Grid container item xs={12}>
                 <Button
                   fullWidth
                   color="primary"
@@ -147,65 +142,64 @@ const Upload = ({history}) => {
               </Grid>
             </Grid>
           </ValidatorForm>
-          {loading &&
-          <Grid item>
-            <CircularProgress/>
-          </Grid>
-          }
-          {inputs.dataUrl.length > 0 &&
-          <Grid item>
-            <img
-              style={
-                {
+          {loading && (
+            <Grid item>
+              <CircularProgress />
+            </Grid>
+          )}
+          {inputs.dataUrl.length > 0 && (
+            <Grid item>
+              <img
+                style={{
                   filter: `
                  brightness(${inputs.brightness}%)
                  contrast(${inputs.contrast}%) 
                  saturate(${inputs.saturation}%)
                  sepia(${inputs.sepia}%)
                  `,
-                  width: '100%',
-                }
-              }
-              src={inputs.dataUrl}
-              alt="preview"/>
-            <Typography>Brightness</Typography>
-            <Slider
-              name="brightness"
-              value={inputs.brightness}
-              min={0}
-              max={200}
-              step={1}
-              onChange={handleSliderChange}
-            />
-            <Typography>Contrast</Typography>
-            <Slider
-              name="contrast"
-              value={inputs.contrast}
-              min={0}
-              max={200}
-              step={1}
-              onChange={handleSliderChange}
-            />
-            <Typography>Saturation</Typography>
-            <Slider
-              name="saturation"
-              value={inputs.saturation}
-              min={0}
-              max={200}
-              step={1}
-              onChange={handleSliderChange}
-            />
-            <Typography>Sepia</Typography>
-            <Slider
-              name="sepia"
-              value={inputs.sepia}
-              min={0}
-              max={200}
-              step={1}
-              onChange={handleSliderChange}
-            />
-          </Grid>
-          }
+                  width: "100%",
+                }}
+                src={inputs.dataUrl}
+                alt="preview"
+              />
+              <Typography>Brightness</Typography>
+              <Slider
+                name="brightness"
+                value={inputs.brightness}
+                min={0}
+                max={200}
+                step={1}
+                onChange={handleSliderChange}
+              />
+              <Typography>Contrast</Typography>
+              <Slider
+                name="contrast"
+                value={inputs.contrast}
+                min={0}
+                max={200}
+                step={1}
+                onChange={handleSliderChange}
+              />
+              <Typography>Saturation</Typography>
+              <Slider
+                name="saturation"
+                value={inputs.saturation}
+                min={0}
+                max={200}
+                step={1}
+                onChange={handleSliderChange}
+              />
+              <Typography>Sepia</Typography>
+              <Slider
+                name="sepia"
+                value={inputs.sepia}
+                min={0}
+                max={200}
+                step={1}
+                onChange={handleSliderChange}
+              />
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </>
