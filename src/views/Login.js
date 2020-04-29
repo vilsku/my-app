@@ -15,7 +15,7 @@ const Login = () => {
         <LoginForm/> :
         <RegisterForm/>
       }
-      <Button onClick={showHide}>{toggle ? 'or register' : 'or login'}</Button>
+      <Button onClick={showHide}>{toggle ? 'not registered yet? do it here' : 'already registered? log in here'}</Button>
     </>
   );
 };
