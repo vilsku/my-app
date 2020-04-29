@@ -14,6 +14,7 @@ import {getAvatarImage} from '../hooks/ApiHooks';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
+import ProfileForm from '../components/ProfileForm';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
@@ -69,6 +70,7 @@ const Profile = () => {
         </CardContent>
       </Card>
       }
+      <ProfileForm />
     </>
   );
 };

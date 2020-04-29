@@ -107,6 +107,25 @@ const checkToken = async (token) => {
   }
 };
 
+const updateProfile = async (inputs, token) => {
+  const fetchOptions = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': token,
+    },
+    body: JSON.stringify(inputs),
+  };
+  try {
+    const response = await fetch(baseUrl + 'users', fetchOptions);
+    const json = await response.json();
+    if (!response.ok) throw new Error(json.message + ': ' + json.error);
+    return json;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
 export {
   useAllMedia,
   useSingleMedia,
@@ -115,4 +134,5 @@ export {
   checkUserAvailable,
   checkToken,
   getAvatarImage,
+  updateProfile,
 };

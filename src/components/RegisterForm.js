@@ -1,38 +1,39 @@
-import React, { useContext, useEffect } from "react";
-import PropTypes from "prop-types";
-import useSignUpForm from "../hooks/RegisterHooks";
-import { checkUserAvailable, login, register } from "../hooks/ApiHooks";
-import { withRouter } from "react-router-dom";
-import { MediaContext } from "../contexts/MediaContext";
-import { Button, Grid } from "@material-ui/core";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import React, {useContext, useEffect} from 'react';
+import PropTypes from 'prop-types';
+import useSignUpForm from '../hooks/RegisterHooks';
+import {checkUserAvailable, login, register} from '../hooks/ApiHooks';
+import {withRouter} from 'react-router-dom';
+import {MediaContext} from '../contexts/MediaContext';
+import {Button, Grid} from '@material-ui/core';
+import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
-const RegisterForm = ({ history }) => {
+const RegisterForm = ({history}) => {
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useContext(MediaContext);
 
   const doRegister = async () => {
     try {
-      await checkUserAvailable(inputs.username);
+      // await checkUserAvailable(inputs.username);
+      delete inputs.confirm;
       await register(inputs);
       // kirjaudu automaagisesti
       const userdata = await login(inputs);
       setUser(userdata.user);
       // console.log(user);
       // tallenna token
-      localStorage.setItem("token", userdata.token);
+      localStorage.setItem('token', userdata.token);
       // siirry etusivulle
-      history.push("/home");
+      history.push('/home');
     } catch (e) {
       console.log(e.message);
       // TODO: näytä virhe
     }
   };
 
-  const { inputs, handleInputChange, handleSubmit } = useSignUpForm(doRegister);
+  const {inputs, handleInputChange, handleSubmit} = useSignUpForm(doRegister);
 
   useEffect(() => {
-    ValidatorForm.addValidationRule("isPasswordMatch", (value) => {
+    ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
       console.log(value);
       if (value !== inputs.password) {
         return false;
@@ -40,7 +41,7 @@ const RegisterForm = ({ history }) => {
       return true;
     });
 
-    ValidatorForm.addValidationRule("isAvailable", async (value) => {
+    ValidatorForm.addValidationRule('isAvailable', async (value) => {
       console.log(value);
       try {
         const response = await checkUserAvailable(value);
