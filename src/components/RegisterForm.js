@@ -57,19 +57,18 @@ const RegisterForm = ({history}) => {
   return (
     <Grid container>
       <Grid item xs={12}>
-        <Typography
-          component="h1"
-          variant="h2"
-          gutterBottom>Register</Typography>
+        <Typography component="h1" variant="h2" gutterBottom>
+          Register
+        </Typography>
       </Grid>
-      <Grid item>
+      <Grid item xs={12}>
         <ValidatorForm
           onSubmit={handleSubmit}
           instantValidate={false}
           noValidate
         >
-          <Grid container>
-            <Grid container item>
+          <Grid container spacing={2}>
+            <Grid container item xs={12}>
               <TextValidator
                 fullWidth
                 type="text"
@@ -77,20 +76,16 @@ const RegisterForm = ({history}) => {
                 label="Username"
                 onChange={handleInputChange}
                 value={inputs.username}
-                validators={[
-                  'required',
-                  'minStringLength:3',
-                  'isAvailable',
-                ]}
+                validators={["required", "minStringLength:3", "isAvailable"]}
                 errorMessages={[
-                  'this field is required',
-                  'minimum 3 charaters',
-                  inputs.username + ' is not available',
+                  "this field is required",
+                  "minimum 3 charaters",
+                  inputs.username + " is not available",
                 ]}
               />
             </Grid>
 
-            <Grid container item>
+            <Grid container item xs={12}>
               <TextValidator
                 fullWidth
                 type="password"
@@ -98,14 +93,15 @@ const RegisterForm = ({history}) => {
                 label="Password"
                 onChange={handleInputChange}
                 value={inputs.password}
-                validators={['minStringLength:5', 'required']}
+                validators={["minStringLength:5", "required"]}
                 errorMessages={[
-                  'minimum length 5 characters',
-                  'this field is required']}
+                  "minimum length 5 characters",
+                  "this field is required",
+                ]}
               />
             </Grid>
 
-            <Grid container item>
+            <Grid container item xs={12}>
               <TextValidator
                 fullWidth
                 type="password"
@@ -113,12 +109,12 @@ const RegisterForm = ({history}) => {
                 label="Confirm password"
                 onChange={handleInputChange}
                 value={inputs.confirm}
-                validators={['isPasswordMatch', 'required']}
-                errorMessages={['password mismatch', 'this field is required']}
+                validators={["isPasswordMatch", "required"]}
+                errorMessages={["password mismatch", "this field is required"]}
               />
             </Grid>
 
-            <Grid container item>
+            <Grid container item xs={12}>
               <TextValidator
                 fullWidth
                 type="email"
@@ -126,12 +122,12 @@ const RegisterForm = ({history}) => {
                 label="Email"
                 onChange={handleInputChange}
                 value={inputs.email}
-                validators={['required', 'isEmail']}
-                errorMessages={['this field is required', 'email is not valid']}
+                validators={["required", "isEmail"]}
+                errorMessages={["this field is required", "email is not valid"]}
               />
             </Grid>
 
-            <Grid container item>
+            <Grid container item xs={12}>
               <TextValidator
                 fullWidth
                 type="text"
@@ -139,18 +135,20 @@ const RegisterForm = ({history}) => {
                 label="Full name"
                 onChange={handleInputChange}
                 value={inputs.full_name}
-                validators={
-                  ['matchRegexp:^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$']
-                }
-                errorMessages={['text only']}
+                validators={[
+                  "matchRegexp:^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+                ]}
+                errorMessages={["text only"]}
               />
             </Grid>
 
-            <Grid container item>
-              <Button fullWidth
+            <Grid container item xs={12}>
+              <Button
+                fullWidth
                 color="primary"
                 type="submit"
-                variant="contained">
+                variant="contained"
+              >
                 Register
               </Button>
             </Grid>

@@ -27,15 +27,14 @@ const LoginForm = ({history}) => {
   return (
     <Grid container>
       <Grid item xs={12}>
-        <Typography
-          component="h1"
-          variant="h2"
-          gutterBottom>Login</Typography>
+        <Typography component="h1" variant="h2" gutterBottom>
+          Login
+        </Typography>
       </Grid>
       <Grid item xs={12}>
         <form onSubmit={handleSubmit}>
-          <Grid container>
-            <Grid container item>
+          <Grid container spacing={2}>
+            <Grid container item xs={12}>
               <TextField
                 fullWidth
                 type="text"
@@ -46,7 +45,7 @@ const LoginForm = ({history}) => {
               />
             </Grid>
 
-            <Grid container item>
+            <Grid container item xs={12}>
               <TextField
                 fullWidth
                 type="password"
@@ -57,12 +56,13 @@ const LoginForm = ({history}) => {
               />
             </Grid>
 
-            <Grid container item>
+            <Grid container item xs={12}>
               <Button
                 fullWidth
                 color="primary"
                 type="submit"
-                variant="contained">
+                variant="contained"
+              >
                 Login
               </Button>
             </Grid>
