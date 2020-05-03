@@ -10,6 +10,8 @@ import Logout from './views/Logout';
 import {MediaProvider} from './contexts/MediaContext';
 import {Container} from '@material-ui/core';
 import Upload from './views/Upload';
+import MyFiles from './views/MyFiles';
+import Modify from './views/Modify';
 
 const App = () => {
   return (
@@ -17,15 +19,17 @@ const App = () => {
     <Router basename={process.env.PUBLIC_URL}>
       <MediaProvider>
         <Container maxWidth="md">
-          <Nav/>
+          <Nav />
           <main>
             <Switch>
-              <Route path="/" exact component={Login}/>
-              <Route path="/home" component={Home}/>
-              <Route path="/profile" component={Profile}/>
-              <Route path="/single/:id" component={Single}/>
-              <Route path="/logout" component={Logout}/>
-              <Route path="/upload" component={Upload}/>
+              <Route path="/" exact component={Login} />
+              <Route path="/home" component={Home} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/single/:id" component={Single} />
+              <Route path="/logout" component={Logout} />
+              <Route path="/upload" component={Upload} />
+              <Route path="/myfiles" component={MyFiles} />
+              <Route path="/modify/:id" component={Modify} />
             </Switch>
           </main>
         </Container>

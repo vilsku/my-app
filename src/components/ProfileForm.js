@@ -51,7 +51,7 @@ const ProfileForm = ({history}) => {
   }, [user, setInputs]);
 
   return (
-    <Grid container spacing={2}>
+    <Grid container>
       <Grid item xs={12}>
         <Button fullWidth color="primary" onClick={showHide}>
           Update profile
@@ -63,7 +63,7 @@ const ProfileForm = ({history}) => {
           <Grid item xs={12}>
             <h1>Update profile</h1>
           </Grid>
-          <Grid item>
+          <Grid item xs={12}>
             <ValidatorForm
               onSubmit={handleSubmit}
               instantValidate={false}

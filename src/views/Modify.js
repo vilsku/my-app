@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import useUploadForm from '../hooks/UploadHooks';
-import {upload} from '../hooks/ApiHooks';
+import {upload, useSingleMedia, modifyFile} from '../hooks/ApiHooks';
 import {
   Button,
   Grid,
@@ -11,13 +10,18 @@ import {
 } from '@material-ui/core';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import BackButton from '../components/BackButton';
+import useModifyForm from '../hooks/ModifyHooks';
 
-const Upload = ({history}) => {
+const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
+
+const Modify = ({history, match}) => {
   const [loading, setLoading] = useState(false);
-  const doUpload = async () => {
+  const file = useSingleMedia(match.params.id);
+
+  const doModify = async () => {
     setLoading(true);
     try {
-      const uploadObject = {
+      const modifyObject = {
         title: inputs.title,
         description: JSON.stringify({
           desc: inputs.description,
@@ -28,13 +32,12 @@ const Upload = ({history}) => {
             sepia: inputs.sepia,
           },
         }),
-        file: inputs.file,
       };
-      const result = await upload(uploadObject, localStorage.getItem('token'));
+      const result = await modifyFile(modifyObject, match.params.id);
       console.log(result);
       setTimeout(() => {
         setLoading(false);
-        history.push('/home');
+        history.push('/myfiles');
       }, 2000);
     } catch (e) {
       console.log(e.message);
@@ -47,37 +50,28 @@ const Upload = ({history}) => {
     setInputs,
     handleInputChange,
     handleSubmit,
-    handleFileChange,
     handleSliderChange,
-  } = useUploadForm(doUpload);
+  } = useModifyForm(doModify);
 
   useEffect(() => {
-    // failriideri tänne
-    const reader = new FileReader();
-
-    reader.addEventListener('load', () => {
-      // convert image file to base64 string
-      setInputs((inputs) => {
-        return {
-          ...inputs,
-          dataUrl: reader.result,
-        };
-      });
-    }, false);
-
-    if (inputs.file !== null) {
-      if (inputs.file.type.includes('image')) {
-        reader.readAsDataURL(inputs.file);
-      } else {
+    (async () => {
+      if (file !== null) {
+        const description = (JSON.parse(file.description));
         setInputs((inputs) => {
           return {
-            ...inputs,
-            dataUrl: 'logo192.png',
+            title: file.title,
+            description: description.desc,
+            filename: file.filename,
+            brightness: description.filters.brightness,
+            contrast: description.filters.contrast,
+            saturation: description.filters.saturation,
+            sepia: description.filters.sepia,
           };
         });
       }
-    }
-  }, [inputs.file, setInputs]);
+    })();
+  }, [file, setInputs]);
+
   console.log('inputs', inputs);
 
   return (
@@ -86,10 +80,10 @@ const Upload = ({history}) => {
       <Grid container>
         <Grid item xs={12}>
           <Typography component="h1" variant="h2" gutterBottom>
-            Upload
+            Modify
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <ValidatorForm
             onSubmit={handleSubmit}
             instantValidate={false}
@@ -122,22 +116,13 @@ const Upload = ({history}) => {
                 />
               </Grid>
               <Grid container item xs={12}>
-                <TextValidator
-                  fullWidth
-                  type="file"
-                  name="file"
-                  accept="image/*,video/*,audio/*"
-                  onChange={handleFileChange}
-                />
-              </Grid>
-              <Grid container item xs={12}>
                 <Button
                   fullWidth
                   color="primary"
                   type="submit"
                   variant="outlined"
                 >
-                  Upload
+                  Save
                 </Button>
               </Grid>
             </Grid>
@@ -147,7 +132,7 @@ const Upload = ({history}) => {
               <CircularProgress />
             </Grid>
           )}
-          {inputs.dataUrl.length > 0 && (
+          {inputs.filename.length > 0 && (
             <Grid item>
               <img
                 style={{
@@ -159,7 +144,7 @@ const Upload = ({history}) => {
                  `,
                   width: "100%",
                 }}
-                src={inputs.dataUrl}
+                src={mediaUrl + inputs.filename}
                 alt="preview"
               />
               <Typography>Brightness</Typography>
@@ -206,8 +191,9 @@ const Upload = ({history}) => {
   );
 };
 
-Upload.propTypes = {
+Modify.propTypes = {
   history: PropTypes.object,
+  match: PropTypes.object,
 };
 
-export default Upload;
+export default Modify;
